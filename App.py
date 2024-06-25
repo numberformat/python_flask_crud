@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -19,11 +19,20 @@ class Data(db.Model):
         self.name = name
         self.email = email
         self.phone = phone
-# start python and type the following to create tables in the database.
-#>>> from App import app, db
-#>>> with app.app_context():
-#...     db.create_all()
-# check the ./instance folder.
+
+@app.route('/insert', methods = ['POST'])
+def insert():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+
+        my_data = Data(name, email, phone)
+        db.session.add(my_data)
+        db.session.commit()
+
+        return redirect(url_for('Index'))
+
 
 @app.route('/')
 def Index():
