@@ -35,10 +35,18 @@ def insert():
 
         return redirect(url_for('Index'))
 
+@app.route('/edit', methods = ['POST'])
+def edit():
+    pass
+
+@app.route('/delete', methods = ['POST'])
+def delete():
+    pass
 
 @app.route('/')
 def Index():
-    return render_template("index.html")
+    all_data = Data.query.all()
+    return render_template("index.html", employees = all_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
