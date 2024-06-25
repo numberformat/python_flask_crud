@@ -35,13 +35,40 @@ def insert():
 
         return redirect(url_for('Index'))
 
-@app.route('/edit', methods = ['POST'])
+@app.route('/edit', methods=['GET', 'POST'])
 def edit():
-    pass
+    if request.method == 'POST':
+        employee_id = request.form.get('id')
+        # Use Session.get() instead of Query.get()
+        employee = db.session.get(Data, employee_id)
+
+        if not employee:
+            flash("Employee not found.")
+            return redirect(url_for('Index'))
+
+        employee.name = request.form['name']
+        employee.email = request.form['email']
+        employee.phone = request.form['phone']
+
+        db.session.commit()
+        flash("Employee Updated Successfully")
+        return redirect(url_for('Index'))
 
 @app.route('/delete', methods = ['POST'])
 def delete():
-    pass
+    employee_id = request.form['id']
+    # Use Session.get() instead of Query.get()
+    employee = db.session.get(Data, employee_id)
+
+    if not employee:
+        flash("Employee not found.")
+        return redirect(url_for('Index'))
+
+    db.session.delete(employee)
+    db.session.commit()
+
+    flash("Employee Deleted Successfully")
+    return redirect(url_for('Index'))
 
 @app.route('/')
 def Index():
