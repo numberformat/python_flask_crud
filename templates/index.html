@@ -7,6 +7,19 @@
             <div class="jumbotron p-3">
                 <h2>Manage <b>Employees </b> <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#mymodal">Add New Employees</button></h2>
 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-success">
+                        {% for message in messages %}
+                            {{ message }}
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close">
+                                <span class="visually-hidden">Close</span>
+                            </button>
+                        {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+
                 <table class="table table-hover table-dark">
                     <tr>
                         <th>Id</th>
