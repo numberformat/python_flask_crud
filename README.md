@@ -13,15 +13,14 @@ Check the commit log for a step by step guide on how to create this application.
 
 ## Prerequisites
 
-Ensure you have Python 3.11 installed on your system. This project uses a Conda environment, but you can also use a virtual environment of your choice.
 
 ## Environment Setup
 
 1. **Create and activate a Conda environment:**
 
     ```sh
-    conda create --name flask_login python=3.11
-    conda activate flask_login
+    python3 -m venv venv
+    source ./venv/bin/activate
     ```
 
 2. **Install required packages:**
